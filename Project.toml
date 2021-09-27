@@ -1,5 +1,5 @@
-name = "PlutoTeaching"
-uuid = "bae8957a-2ed1-4ef0-b7dc-7a328dc87654"
+name = "PlutoQuestions"
+uuid = "418cef06-5c5a-4052-94a4-f5c8622a22c1"
 authors = ["brdjaegh <bram.dejaegher@ugent.be> and contributors"]
 version = "0.1.0"
 

@@ -1,6 +1,6 @@
-using PlutoTeaching
+using PlutoQuestions
 using Test
 
-@testset "PlutoTeaching.jl" begin
+@testset "PlutoQuestions.jl" begin
     # Write your tests here.
 end
