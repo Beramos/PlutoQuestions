@@ -30,12 +30,3 @@ fyi(text) = Markdown.MD(
 		]
 	)
 )
-
-bomb(text) = Markdown.MD(
-	Markdown.Admonition("bomb",
-		"Self destruct warning",
-		[bomb_css,
-			text
-		]
-	)
-)
