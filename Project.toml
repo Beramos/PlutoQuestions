@@ -3,6 +3,9 @@ uuid = "418cef06-5c5a-4052-94a4-f5c8622a22c1"
 authors = ["brdjaegh <bram.dejaegher@ugent.be> and contributors"]
 version = "0.1.0"
 
+[deps]
+Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"
+
 [compat]
 julia = "1"
 
