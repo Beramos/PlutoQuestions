@@ -8,6 +8,7 @@ bram.de.jaegher@gmail.com
 
 module PlutoQuestions
   using Markdown
+  using PlutoUI
   using Markdown: MD, Admonition
 
   export still_missing, keep_working, correct, not_defined, hint, fyi  

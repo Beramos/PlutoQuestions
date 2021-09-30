@@ -1,6 +1,7 @@
 using PlutoQuestions
 using Test
 using Markdown
+using PlutoUI
 
 @testset "Admonition" begin
        @test typeof(PlutoQuestions.fyi("test")) <: Markdown.MD
@@ -46,3 +47,8 @@ qb = QuestionBlock(;title=Markdown.MD("title"),
        @test qb |> PlutoQuestions.tohtml |> typeof <:String
 end
 
+@testset "Macros" begin
+     # I use zero-indexing to induce a `BoundsError`  
+     @test !@safe([2.0][0])
+     @test @safe([2.0][1]) == 2.0
+end
