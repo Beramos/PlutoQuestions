@@ -39,6 +39,6 @@ jobs:
         with:
           file: lcov.info
           
-    name: Code coverage
-    run: julia -e 'using Pkg; cd(Pkg.dir("PlutoQuestions")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
+      - name: Code coverage
+        run: julia -e 'using Pkg; cd(Pkg.dir("PlutoQuestions")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
 
