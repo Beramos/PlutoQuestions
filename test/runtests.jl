@@ -41,6 +41,8 @@ qb = QuestionBlock(;title=Markdown.MD("title"),
        @test Question{Hard}(;description=Markdown.MD("incorrect"), validators= @safe[false]) |> typeof <: Question{Hard}
        @test Question{Hard}(;description=Markdown.MD("crash"), validators= @safe[a[0]]) |> typeof <: Question{Hard}    
 
+       @test Question{NoDiff}(;description=Markdown.MD("correct"), validators= @safe[missing, true, false, missing]) |> typeof <: Question{NoDiff}
+
        @test q |> PlutoQuestions.check_answer |> typeof <: Markdown.MD 
        @test qb |> typeof <: QuestionBlock
        @test qb |> validate |> typeof <:QuestionBlock
