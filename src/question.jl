@@ -131,27 +131,12 @@ function tohtml(q::QuestionBlock)
 		state_string *= "<p> $(html(q.questions[index].status)) </p>"
 	end
 
-	opt_state_string = ""
-	if length(q.questions) > 1
-		for opt_question in q.questions[N_mandatory+1:end]
-			if opt_question.difficulty !== ""
-			opt_state_string *= "<p> <b> Optional ($(split(string(typeof(opt_question.difficulty)), ".")[2])): </b> </p>"
-			else
-			opt_state_string *= "<p> <b> Optional: </b> </p>"
-			end
-			if opt_question.description !== ""
-				opt_state_string *= "<p> $(html(opt_question.description)) </p>"
-			end
-			opt_state_string *= "<p> $(html(opt_question.status)) </p>"
-		end
-	end
-
 	out = """
 		<div class="question">
 			$(html(q.title))
 			<p> $(html(q.description)) </p>
 			$state_string
-			$opt_state_string
+			
 			$hint_string
 		</div>
 		$question_css		
