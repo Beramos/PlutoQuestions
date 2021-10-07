@@ -15,7 +15,7 @@ end
 q1 = Question{NoDiff}(;description=Markdown.MD("correct"), validators= @safe[true])
 q2 = Question{NoDiff}(;description=Markdown.MD("correct"), validators= @safe[missing])
 q3 = Question{NoDiff}(;description=Markdown.MD("correct"), validators= @safe[false])
-q4 = Question{NoDiff}(;description=Markdown.MD("correct"), validators= @safe[true])
+q4 = Question{NoDiff}(;description=Markdown.MD("correct"), validators= @safe[true, false, missing])
 
 qb1 = QuestionBlock(;title=Markdown.MD("title"),
                      description=Markdown.MD("description"), 
@@ -56,6 +56,7 @@ qb2 = QuestionBlock(;title=Markdown.MD("title"),
        @test Question{NoDiff}(;description=Markdown.MD("correct"), validators= @safe[missing, true, false, missing]) |> typeof <: Question{NoDiff}
        
        @test q1 |> PlutoQuestions.check_answer |> typeof <: Markdown.MD 
+       @test q4 |> PlutoQuestions.check_answer |> typeof <: Markdown.MD 
        @test qb1 |> typeof <: QuestionBlock
        @test qb1 |> validate |> typeof <:QuestionBlock
        @test qb1 |> PlutoQuestions.tohtml |> typeof <:String
@@ -63,7 +64,7 @@ qb2 = QuestionBlock(;title=Markdown.MD("title"),
        @test qb2 |> typeof <: QuestionBlock
        @test qb2 |> validate |> typeof <:QuestionBlock
        @test qb2 |> PlutoQuestions.tohtml |> typeof <:String
-
+       
 end
 
 @testset "Macros" begin
