@@ -12,12 +12,24 @@ using PlutoUI
        @test typeof(PlutoQuestions.still_missing()) <: Markdown.MD
 end
 
-q = Question{NoDiff}(;description=Markdown.MD("correct"), validators= @safe[true])
-qb = QuestionBlock(;title=Markdown.MD("title"),
+q1 = Question{NoDiff}(;description=Markdown.MD("correct"), validators= @safe[true])
+q2 = Question{NoDiff}(;description=Markdown.MD("correct"), validators= @safe[missing])
+q3 = Question{NoDiff}(;description=Markdown.MD("correct"), validators= @safe[false])
+q4 = Question{NoDiff}(;description=Markdown.MD("correct"), validators= @safe[true, false, missing])
+
+qb1 = QuestionBlock(;title=Markdown.MD("title"),
                      description=Markdown.MD("description"), 
-                     questions = [q],
+                     questions = [q1],
                      hints=[ hint(Markdown.MD("Have you tried this?")),
                      hint(Markdown.MD("Have you tried switching it on and off again?"))]
+);
+
+qb2 = QuestionBlock(;title=Markdown.MD("title"),
+                     description=Markdown.MD("description"), 
+                     questions = [q1, q2, q3, q4],
+                     hints=[ hint(Markdown.MD("Have you tried this?")),
+                     hint(Markdown.MD("Have you tried switching it on and off again?"))]
+
 );
 
 @testset "Question" begin
@@ -41,10 +53,18 @@ qb = QuestionBlock(;title=Markdown.MD("title"),
        @test Question{Hard}(;description=Markdown.MD("incorrect"), validators= @safe[false]) |> typeof <: Question{Hard}
        @test Question{Hard}(;description=Markdown.MD("crash"), validators= @safe[a[0]]) |> typeof <: Question{Hard}    
 
-       @test q |> PlutoQuestions.check_answer |> typeof <: Markdown.MD 
-       @test qb |> typeof <: QuestionBlock
-       @test qb |> validate |> typeof <:QuestionBlock
-       @test qb |> PlutoQuestions.tohtml |> typeof <:String
+       @test Question{NoDiff}(;description=Markdown.MD("correct"), validators= @safe[missing, true, false, missing]) |> typeof <: Question{NoDiff}
+       
+       @test q1 |> PlutoQuestions.check_answer |> typeof <: Markdown.MD 
+       @test q4 |> PlutoQuestions.check_answer |> typeof <: Markdown.MD 
+       @test qb1 |> typeof <: QuestionBlock
+       @test qb1 |> validate |> typeof <:QuestionBlock
+       @test qb1 |> PlutoQuestions.tohtml |> typeof <:String
+
+       @test qb2 |> typeof <: QuestionBlock
+       @test qb2 |> validate |> typeof <:QuestionBlock
+       @test qb2 |> PlutoQuestions.tohtml |> typeof <:String
+       
 end
 
 @testset "Macros" begin
